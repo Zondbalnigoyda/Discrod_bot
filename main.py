@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import random
+from datetime import datetime
 from discord.ext import commands
 from sett_tok import BOT_TOKEN 
 
@@ -56,5 +57,39 @@ async def on_message(message):
                 await message.channel.send('Воу, ты угадал!')
             else:
                 await message.channel.send(f'К сожалению ты не угадал, правильный ответ - {answer}.')
+
+#Создать квиз не получилось из-за трудностей возникших в процессе реализации.
+
+@bot.event
+async def on_message(message):
+    if message.content.startswith('!кубик'):
+        await message.channel.send('Подбрасываю кубик...')
+        await asyncio.sleep(3.0)
+        kub_num = random.randint(1,6)
+        if kub_num == 1:
+            await message.channel.send('Выпало число 1')
+        elif kub_num == 2:
+            await message.channel.send('Выпало число 2')
+        elif kub_num == 3:
+            await message.channel.send('Выпало число 3')
+        elif kub_num == 4:
+            await message.channel.send('Выпало число 4')
+        elif kub_num == 5:
+            await message.channel.send('Выпало число 5')
+        elif kub_num == 6:
+            await message.channel.send('Выпало число 6')
+
+@bot.event
+async def on_message(message):
+    if message.content.startswith('!help') or message.content.startswith('!помощь') or message.content.startswith('!команды') or message.content.startswith('!comands'):
+        await message.channel.send('-------------------------СПИСОК ДОСТУПНЫХ КОМАНД-------------------------------')
+        await message.channel.send('============================================================================')
+        await message.channel.send('=1.=$hello - при вводе бот скажет вам привет====================================')
+        await message.channel.send('=2.=#he - при вводе бот напишет hehehehehe===================================')    
+        await message.channel.send('=3.=!гойда, при вводе бот напишет сообщение, а потом его отредактирует=========')    
+        await message.channel.send('=4.=!угадай число, при вводе вы должны будете угадать число за пять секунд=====')     
+        await message.channel.send('=5.=!кубик, число при вводе бот подбросит кубик и напишет вам результат========')    
+        await message.channel.send('============================================================================')
+        await message.channel.send('--------------------------------------------------------------------------------------------')    
 
 bot.run(BOT_TOKEN)
